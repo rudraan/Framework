@@ -7,6 +7,7 @@ import objectMapping.MyDynamicLocators;
 import objectMapping.MyLocators;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 import java.time.Duration;
 
@@ -23,8 +24,6 @@ public class EggTimerPage {
         myLocators = new MyLocators();
     }
 
-
-
     //public By timerTextBox = myLocators.timerTxtBox;
     public void navigateToUrl(String url) {
         webDriverUtil.navigate(url);
@@ -32,6 +31,7 @@ public class EggTimerPage {
 
     public void pageLoad() {
         webElementUtil.verifyPageLoad();
+        Assert.assertTrue(webElementUtil.verifyPageLoad());
     }
 
     public void addTimer(String time) {
@@ -47,10 +47,11 @@ public class EggTimerPage {
         webDriverUtil.waitForAlertPresent(time);
         String alertTxt = webDriverUtil.getTextFromAlert();
         System.out.println("Alert text displayed is: "+ alertTxt);
+        Assert.assertEquals(alertTxt,"Time Expired!" );
 
     }
 
-    public void clickBtn(String time) {
-        webElementUtil.click(new MyDynamicLocators(time).timerBtn);
-    }
+//    public void clickTimerBtn(String time) {
+//        webElementUtil.click(new MyDynamicLocators(time).timerBtn);
+//    }
 }

@@ -45,8 +45,8 @@ public class EggTimerStepDef {
         eggTimerPage.verifyAlertPopUp(time);
     }
 
-    @When("user clicks on {string} button")
-    public void user_clicks_on_button(String time){
-        eggTimerPage.clickBtn(time);
-    }
+//    @When("user clicks on {string} button")
+//    public void user_clicks_on_button(String time){
+//        eggTimerPage.clickTimerBtn(time);
+//    }
 }

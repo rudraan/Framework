@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WebElementUtil {
 
@@ -63,15 +62,17 @@ public class WebElementUtil {
         return ele.getText();
     }
 
-    /** wrapper to verify page is loaded
+    /**
+     * wrapper to verify page is loaded
      *
-     *
-     * */
-    public void verifyPageLoad(){
+     * @return
+     */
+    public boolean verifyPageLoad(){
         driver = DriverUtil.getInstance().getDriver();
         JavascriptExecutor js = (JavascriptExecutor) driver;
         boolean pageLoadValidation = js.executeScript("return document.readyState").equals("complete");
-        System.out.println("pageLoadValidation: " +pageLoadValidation);
+        //System.out.println("pageLoadValidation: " +pageLoadValidation);
+        return pageLoadValidation;
     }
 
 
