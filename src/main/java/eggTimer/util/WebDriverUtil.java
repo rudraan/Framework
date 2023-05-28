@@ -1,29 +1,37 @@
 package eggTimer.util;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.manager.SeleniumManager;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
-import java.util.Properties;
 
 public class WebDriverUtil {
 
-    WebDriver driver;
+     WebDriver driver;
     PropertyReaderUtil propertyReaderUtil;
+    //DriverUtil driverUtil;
+
+    //creating constructor of WebDriverUtil class to initialise the objects
     public WebDriverUtil(){
-       this.driver = DriverUtil.getInstance().getDriver();
+        //driverUtil = DriverUtil.getInstance();
+        //driver = driverUtil.getDriver();
+        driver = DriverUtil.getInstance().getDriver();
        propertyReaderUtil = new PropertyReaderUtil();
     }
-    //Wait for the Alert present ignoring the StaleElementReferenceException
-    public boolean waitForAlertPresent( Duration waitTime) {
+
+
+    /**Wait for the Alert present ignoring the StaleElementReferenceException
+     *
+     * @return boolean value true if alert is present
+     * */
+    public boolean waitForAlertPresent(String waitTimeString) {
         boolean flag = false;
-        new WebDriverWait(driver, waitTime).ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.alertIsPresent());
+        long waitTime = Long.parseLong(waitTimeString);
+            new WebDriverWait(driver, Duration.ofSeconds(waitTime)).ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.alertIsPresent());
+
         try{
             driver.switchTo().alert();
             return flag = true;
@@ -33,13 +41,20 @@ public class WebDriverUtil {
     }
 
 
-    //wrapper method to navigate to url
+    /** wrapper method to navigate to url
+     *
+     * @param url takes the url value from Config file and navigates to it
+     * */
     public void navigate(String url) {
-
+       // driver = DriverUtil.getInstance().getDriver();
+       // driverUtil.getDriver().navigate().to(url);
         driver.navigate().to(url);
+
     }
 
-    //to get the text from a alert
+    /** to get text from alert
+     * @return the text present in the alert
+     * */
     public String getTextFromAlert() {
         Alert alert = driver.switchTo().alert();
         return alert.getText();

@@ -14,12 +14,14 @@ public class PropertyReaderUtil {
 
     }
 
-    //function to load the properties file
+    /**function to load the properties file
+     *
+     * this function is used to load the config properties file
+     * */
     public void loadConfigProperties(){
         properties = new Properties();
         String fileName = System.getProperty("user.dir") + "/src/test/resources/config.properties";
 
-        //load properties file
         try {
             properties.load(new FileInputStream(fileName));
         } catch (IOException e) {
@@ -27,7 +29,10 @@ public class PropertyReaderUtil {
         }
     }
 
-    //function to get the properties from properties file
+    /**function to get the properties from properties file
+     * @param propertyName this is used to get the property name from config.properties file
+     * @return the property value from the config.properties
+     * */
     public String getProperties(String propertyName) {
         return properties.getProperty(propertyName);
     }

@@ -9,6 +9,16 @@ Feature: To test EggTimer Site
     Then verify user is able to see the alert when "<Time>" is reached
     Examples:
       | Time |
-      |5 sec |
+      | 5   |
 
+#  Scenario Outline: To verify time expired message shown on finish of timelapse when a timer is selected
+#    Given read the browser from properties file
+#    And read the url from properties file and navigates
+#    Then verify that the page gets loaded
+#    When user clicks on "<Time>" button
+#    And clicks on start button
+#    Then verify user is able to see the alert when "<Time>" is reached
+#    Examples:
+#      | Time |
+#      | 5   |
 

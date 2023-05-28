@@ -1,17 +1,23 @@
 package eggTimer.util;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WebElementUtil {
 
-    DriverUtil driverUtil = DriverUtil.getInstance();
-    WebDriver driver = driverUtil.getDriver();
+    //DriverUtil driverUtil = DriverUtil.getInstance();
+    WebDriver driver = DriverUtil.getInstance().getDriver();
 
-    //wrapper method of click() in selenium
-    public boolean click(WebElement ele){
-
+    /** wrapper method to click a webElement in selenium
+     *
+     * @param by Takes the locators as input
+     * @return boolean true once element is found and clicked
+     * */
+    public boolean click(By by){
+        WebElement ele = findElement(by);
         if(ele.isDisplayed()){
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("arguments[0].scrollIntoView();", ele);
@@ -23,15 +29,33 @@ public class WebElementUtil {
 
     }
 
-    //wrapper method of sendKeys() in selenium
-    public boolean sendKeys(WebElement ele, String value){
+    /** wrapper method to send text in textbox in selenium
+     *
+     * @param by Takes the locators as input
+     * @param value takes the value to be send to the textbox WebElement
+     * @return boolean value true once user enters text in the textBox
+     * */
+    public boolean sendKeys(By by, String value){
+        WebElement ele = findElement(by);
         ele.clear();
         ele.sendKeys(value);
         return true;
     }
 
+    /** wrapper method for finding Elements in selenium
+     *
+     * @param by Takes the locators as input
+     * @return the element found by locating the xpath of the locator specified
+     * */
+    public WebElement findElement(By by){
+        return driver.findElement(by);
+    }
 
-    //to get the text of a webelement
+    /** to get the text of a webelement
+     *
+     * @param ele takes webElement as the input value
+     * @return as 'String' the text present in the webElement
+     * */
     public String getText(WebElement ele) {
         if(!ele.isDisplayed()) {
             return null;
@@ -39,7 +63,16 @@ public class WebElementUtil {
         return ele.getText();
     }
 
-
+    /** wrapper to verify page is loaded
+     *
+     *
+     * */
+    public void verifyPageLoad(){
+        driver = DriverUtil.getInstance().getDriver();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        boolean pageLoadValidation = js.executeScript("return document.readyState").equals("complete");
+        System.out.println("pageLoadValidation: " +pageLoadValidation);
+    }
 
 
 

@@ -10,7 +10,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class DriverUtil {
 
-    //creating instance of DriverUtil singleton class
+
     private static DriverUtil driverInstance = null;
     WebDriver driver;
 
@@ -19,6 +19,9 @@ public class DriverUtil {
 
     }
 
+    /**creating instance of DriverUtil singleton class
+     * @return DriverUtil returns the singleton object of the class
+     * **/
     //to create instance of class
     public static DriverUtil getInstance() {
         if (driverInstance == null) {
@@ -31,12 +34,17 @@ public class DriverUtil {
         return driverInstance;
     }
 
-    //return the browser driver instance to all classes which require it
+    /** return the browser driver instance to all classes which require it
+     * @return WebDriver returns the driver instance
+     * **/
     public WebDriver getDriver() {
         return this.driver;
     }
 
-    //Set browser
+    /**Set browser
+     * @param browserType  returns the instance of the browser type selected
+     *
+     * **/
     public void setBrowser(String browserType) {
         switch (browserType) {
             case "firefox":
@@ -47,10 +55,6 @@ public class DriverUtil {
                 WebDriverManager.chromedriver().setup();
                 this.driver = new ChromeDriver();
                 break;
-//            case "chromium":
-//                WebDriverManager.chromiumdriver().create();
-//                driver = new ChromiumDriver();
-//                break;
             case "edge":
                 WebDriverManager.edgedriver().setup();
                 this.driver = new EdgeDriver();
