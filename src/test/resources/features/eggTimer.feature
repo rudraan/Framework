@@ -1,5 +1,6 @@
 Feature: To test EggTimer Site
 
+  @regression
   Scenario Outline: To verify time expired message shown on finish of timelapse when a timer is selected
     Given read the browser from properties file
     And read the url from properties file and navigates

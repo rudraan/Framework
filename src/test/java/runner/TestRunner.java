@@ -11,10 +11,12 @@ import static io.cucumber.testng.CucumberOptions.SnippetType.CAMELCASE;
 @CucumberOptions(
             features = "src/test/resources/features",
             glue = {"eggTimer.stepDef"},
-            plugin = { "pretty", "html:target/cucumber-reports", "summary"},
+            plugin = { "pretty", "html:target/cucumber-reports",
+                    "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:","summary"},
             snippets = CAMELCASE,
             monochrome = true,
             publish = true)
+
     public class TestRunner extends AbstractTestNGCucumberTests {
 
         public Object[][] scenario(){

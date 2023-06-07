@@ -1,10 +1,12 @@
 package eggTimer.util;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 
 public class WebDriverUtil {
@@ -58,6 +60,17 @@ public class WebDriverUtil {
     public String getTextFromAlert() {
         Alert alert = driver.switchTo().alert();
         return alert.getText();
+    }
+
+    /** to capture the path of error screenshot
+     * @return the path where the screenshots are captured
+     * */
+    public static String captureScreenshot(WebDriver driver) throws IOException {
+        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        File Dest = new File("src/../FrameworkImages/" + System.currentTimeMillis() + ".png");
+        String errflpath = Dest.getAbsolutePath();
+        FileUtils.copyFile(scrFile, Dest);
+        return errflpath;
     }
 
 }
